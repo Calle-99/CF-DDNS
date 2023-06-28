@@ -16,7 +16,9 @@ KEY = os.environ["KEY"]  #"o1zrmHAF"
 #修改需要更改的dnspod域名和子域名
 DOMAINS = {
     "haoka.plus": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"]},
-    "91haoka.plus": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"]}
+    "91haoka.plus": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"]},
+    "ehco.vip": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"]},
+    "1s.fit": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"]}
 }
 #腾讯云后台获取 https://console.cloud.tencent.com/cam/capi
 SECRETID = os.environ["SECRETID"]    #'AKIDV**********Hfo8CzfjgN'
