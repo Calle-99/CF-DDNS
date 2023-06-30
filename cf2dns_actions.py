@@ -16,7 +16,7 @@ KEY = os.environ["KEY"]  #"o1zrmHAF"
 #修改需要更改的dnspod域名和子域名
 DOMAINS = {
     "haoka.plus": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"]},
-    "91haoka.plus": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"]},
+    "91haoka.plus": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"], "cdn": ["DEF"]},
     "ehco.vip": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"]},
     "1s.fit": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"]}
 }
@@ -68,9 +68,9 @@ def changeDNS(line, s_info, c_info, domain, sub_domain, cloud):
                     break
                 cf_ip = c_info.pop(random.randint(0,len(c_info)-1))["ip"]
                 if cf_ip in str(s_info):
-                    continue
+                    继续
                 ret = cloud.change_record(domain, info["recordId"], sub_domain, cf_ip, RECORD_TYPE, line, TTL)
-                if(DNS_SERVER != 1 or ret["code"] == 0):
+                if(DNS_SERVER != 1  或者 ret["code"] == 0):
                     print("CHANGE DNS SUCCESS: ----Time: " + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "----DOMAIN: " + domain + "----SUBDOMAIN: " + sub_domain + "----RECORDLINE: "+line+"----RECORDID: " + str(info["recordId"]) + "----VALUE: " + cf_ip )
                 else:
                     print("CHANGE DNS ERROR: ----Time: " + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "----DOMAIN: " + domain + "----SUBDOMAIN: " + sub_domain + "----RECORDLINE: "+line+"----RECORDID: " + str(info["recordId"]) + "----VALUE: " + cf_ip + "----MESSAGE: " + ret["message"] )
@@ -80,22 +80,22 @@ def changeDNS(line, s_info, c_info, domain, sub_domain, cloud):
                     break
                 cf_ip = c_info.pop(random.randint(0,len(c_info)-1))["ip"]
                 if cf_ip in str(s_info):
-                    continue
+                    继续
                 ret = cloud.create_record(domain, sub_domain, cf_ip, RECORD_TYPE, line, TTL)
-                if(DNS_SERVER != 1 or ret["code"] == 0):
+                if(DNS_SERVER != 1  或者 ret["code"] == 0):
                     print("CREATE DNS SUCCESS: ----Time: " + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "----DOMAIN: " + domain + "----SUBDOMAIN: " + sub_domain + "----RECORDLINE: "+line+"----VALUE: " + cf_ip )
                 else:
                     print("CREATE DNS ERROR: ----Time: " + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "----DOMAIN: " + domain + "----SUBDOMAIN: " + sub_domain + "----RECORDLINE: "+line+"----RECORDID: " + str(info["recordId"]) + "----VALUE: " + cf_ip + "----MESSAGE: " + ret["message"] )
         else:
             for info in s_info:
-                if create_num == 0 or len(c_info) == 0:
+                if create_num == 0  或者 len(c_info) == 0:
                     break
                 cf_ip = c_info.pop(random.randint(0,len(c_info)-1))["ip"]
                 if cf_ip in str(s_info):
                     create_num += 1
-                    continue
+                    继续
                 ret = cloud.change_record(domain, info["recordId"], sub_domain, cf_ip, RECORD_TYPE, line, TTL)
-                if(DNS_SERVER != 1 or ret["code"] == 0):
+                if(DNS_SERVER != 1  或者 ret["code"] == 0):
                     print("CHANGE DNS SUCCESS: ----Time: " + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "----DOMAIN: " + domain + "----SUBDOMAIN: " + sub_domain + "----RECORDLINE: "+line+"----RECORDID: " + str(info["recordId"]) + "----VALUE: " + cf_ip )
                 else:
                     print("CHANGE DNS ERROR: ----Time: " + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "----DOMAIN: " + domain + "----SUBDOMAIN: " + sub_domain + "----RECORDLINE: "+line+"----RECORDID: " + str(info["recordId"]) + "----VALUE: " + cf_ip + "----MESSAGE: " + ret["message"] )
@@ -108,7 +108,7 @@ def main(cloud):
     if len(DOMAINS) > 0:
         try:
             cfips = get_optimization_ip()
-            if cfips == None or cfips["code"] != 200:
+            if cfips == 无  或者 cfips["code"] != 200:
                 print("GET CLOUDFLARE IP ERROR: ----Time: " + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) )
                 return
             cf_cmips = cfips["info"]["CM"]
@@ -125,15 +125,15 @@ def main(cloud):
                         ret = cloud.get_record(domain, 20, sub_domain, "CNAME")
                         if ret["code"] == 0:
                             for record in ret["data"]["records"]:
-                                if record["line"] == "移动" or record["line"] == "联通" or record["line"] == "电信":
+                                if record["line"] == "移动"  或者 record["line"] == "联通"  或者 record["line"] == "电信":
                                     retMsg = cloud.del_record(domain, record["id"])
                                     if(retMsg["code"] == 0):
                                         print("DELETE DNS SUCCESS: ----Time: "  + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "----DOMAIN: " + domain + "----SUBDOMAIN: " + sub_domain + "----RECORDLINE: "+record["line"] )
                                     else:
                                         print("DELETE DNS ERROR: ----Time: "  + str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())) + "----DOMAIN: " + domain + "----SUBDOMAIN: " + sub_domain + "----RECORDLINE: "+record["line"] + "----MESSAGE: " + retMsg["message"] )
                     ret = cloud.get_record(domain, 100, sub_domain, RECORD_TYPE)
-                    if DNS_SERVER != 1 or ret["code"] == 0 :
-                        if DNS_SERVER == 1 and "Free" in ret["data"]["domain"]["grade"] and AFFECT_NUM > 2:
+                    if DNS_SERVER != 1  或者 ret["code"] == 0 :
+                        if DNS_SERVER == 1 和 "Free" in ret["data"]["domain"]["grade"] 和 AFFECT_NUM > 2:
                             AFFECT_NUM = 2
                         cm_info = []
                         cu_info = []
