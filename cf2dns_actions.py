@@ -17,7 +17,7 @@ KEY = os.environ["KEY"]  #"o1zrmHAF"
 DOMAINS = {
     "haoka.plus": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"]},
     "91haoka.plus": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"], "cdn": ["DEF"]},
-    "ehco.vip": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"]},
+    "ehco.vip": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"]}, "cdn": ["DEF"],
     "1s.fit": {"@": ["CM","CU","CT"], "*": ["CM", "CU", "CT"]}
 }
 #腾讯云后台获取 https://console.cloud.tencent.com/cam/capi
