@@ -12,11 +12,11 @@ import sys
 
 #可以从https://shop.hostmonit.com获取
 KEY = os.environ["KEY"]  #"o1zrmHAF"
-#CM:移动 CU:联通 CT:电信 AB:境外 DEF:默认
 #修改需要更改的dnspod域名和子域名
+#CM:移动 CU:联通 CT:电信 AB:境外 DEF:默认
 DOMAINS = {
-    "haoka.plus": {"@": ["CM","CU","CT","DEF"], "*": ["CM", "CU", "CT","DEF"]},
-    "91haoka.plus": {"@": ["CM","CU","CT","DEF"], "*": ["CM", "CU", "CT","DEF"], "cdn": ["CM","CU","CT","DEF"]},
+#    "haoka.plus": {"@": ["CM","CU","CT","DEF"], "*": ["CM", "CU", "CT","DEF"]},
+#    "91haoka.plus": {"@": ["CM","CU","CT","DEF"], "*": ["CM", "CU", "CT","DEF"], "cdn": ["CM","CU","CT","DEF"]},
     "ehco.vip": {"@": ["CM","CU","CT","DEF"], "*": ["CM", "CU", "CT","DEF"], "cdn": ["CM","CU","CT","DEF"]},
     "1s.fit": {"@": ["CM","CU","CT","DEF"], "*": ["CM", "CU", "CT","DEF"]}
 }
